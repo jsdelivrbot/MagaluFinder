@@ -1,0 +1,27 @@
+link(rel='stylesheet', href='/stylesheets/menu.css')
+div(class='divMenu')
+	div(class='divMenuItens')
+	
+	div(class='container-strip-footer')
+		span(class='divLu')
+			img(src='/images/lu.png' height='155px' width='155px')
+		include strip-colors
+
+	div(class='divMenuGeral')
+		a(href='/login' style='position: fixed;right: 2%; margin-top:10px;color:white;text-decoration:none') ADM
+
+		span(class='logo')
+			a(class='fontLogoB' href='/') magazineluiza
+			a(class='fontLogo' href='/') .com
+			br
+			a(class='fontLogo' style='margin-left:120px;font-size:15px' href='/') /MagaluFinder
+		div(class='campoGeral')
+
+	div(class='campoItens')
+		form(method='Post' id='formPost')
+			input(type='text' id='search' name='search' class='inputBuscar' placeHolder='Procure por código, nome, marca' )
+			button(class='btnSearch' type='submit')
+			div(style='display:none')
+				input(type='text' id='Latitude' name='Latitude')
+				input(type='text' id='Longitude' name='Longitude')
+		

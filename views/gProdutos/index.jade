@@ -1,0 +1,12 @@
+extends ../layout-adm
+	
+block content
+	if messages.falha
+		div(style='text-align:center;position:fixed;top:160px;width:100%' class="alert alert-danger")
+			each msg in messages.falha
+				b= msg
+
+	div(class='welcome')
+
+		h1(class='Title' style='margin-top:50px') Olá Sr(a). #{nome}
+		h2(class='Title') Seja bem vindo!

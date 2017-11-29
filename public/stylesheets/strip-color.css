@@ -1,0 +1,12 @@
+.container-strip-footer{overflow:hidden;width:98%;padding-left: 1%;position:absolute;}
+.strip-multi-colors{height:5px;width:100%;overflow:hidden;margin-top: 0}
+.yellow{border-radius:4px 0 0 0;-moz-background-clip:padding;-webkit-background-clip:padding-box;background-clip:padding-box;background-color:#FFCE00;width:10%;height:5px;float:left}
+.orange{background-color:#FB9600;width:10%;height:5px;float:left}
+.red{background-color:#E25335;width:10%;height:5px;float:left}
+.rose{background-color:#DE349E;width:10%;height:5px;float:left}
+.purple{background-color:#BF2FDC;width:10%;height:5px;float:left} 
+.deep-purple{background-color:#5D33D5;width:10%;height:5px;float:left} 
+.blue{background-color:#2B7CD7;width:10%;height:5px;float:left} 
+.cyan{background-color:#33C3DD;width:10%;height:5px;float:left} 
+.light-green{background-color:#32D9A1;width:10%;height:5px;float:left} 
+.green{border-radius:0 4px 0 0;-moz-background-clip:padding;-webkit-background-clip:padding-box;background-clip:padding-box;background-color:#3FCB2A;width:10%;height:5px;float:left}

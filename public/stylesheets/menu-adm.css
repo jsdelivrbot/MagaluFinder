@@ -1,0 +1,107 @@
+.divMenu{
+	position:fixed;
+	top: 0;
+	right: 0;
+	width:100%;
+	height: 160px;
+	background-color:#0083CA;
+}
+.inputBuscar{
+	margin-top:10px;
+	border-radius: 6px 0 0 6px;
+	margin-left:155px;
+	padding:0 0 0 10px;
+	min-width: 170px;
+	border: none;
+	width: 30%;
+	height: 25px;
+}
+
+.aDescricao{
+	margin-top: 5px;
+	color:white;
+}
+
+.btnSearch{
+	margin-top: 10px;
+	width:30px;
+	background-image:url(/images/search.png);
+	background-color: #FFFAFA;
+	background-size: 20px;
+	background-position: center;
+	background-repeat: no-repeat;
+	border:none;
+	position:absolute;
+	border-radius: 0 6px 6px 0;
+	height: 25px;
+}
+
+.btnSearch:hover {
+	background-color: #EEE9E9;
+	border:none;
+	cursor:pointer;
+}
+
+.campoItens{
+	width: 100%;
+	margin-left: 2px;
+	position:fixed;
+	margin-top:110px;
+	text-align: center;
+}
+
+
+.divMenuItens{
+	width: 100%;
+	height: 50px;
+	position:absolute;
+	margin-top:110px;
+	background-color:#02659B;
+}
+
+.divMenuGeral{
+	margin-left:155px; 
+	width: 89%;
+	height: 110px;
+	position:fixed;
+}
+
+.logo{
+	position:absolute;
+	padding-top:40px;
+}
+
+.fontLogoB{
+	font-family: Arial;
+	color:white;
+	font-size:25px;
+	font-weight: bold;
+}
+
+.fontLogo{
+	font-family: Arial;
+	color:white;
+	font-size:21px;
+}
+
+.campoGeral{
+	margin-left: 20%;
+	width: 80%;
+	height: 100%;
+}
+
+.itensMenu{
+	margin-left:120px;
+	color:white;
+	margin-top: 8px;
+}
+
+.itemMenu{
+	margin-right: 20px;
+	color:white;
+}
+
+.itemMenu:hover{
+	color:white;
+	text-decoration:none; 
+}

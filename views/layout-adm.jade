@@ -1,0 +1,25 @@
+doctype html
+html(lang='pt-br' ng-app="MagaluFinder")
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel="icon" href="/images/icone.jpg" type="image/x-icon")
+    script(src='https://code.jquery.com/jquery-1.12.4.min.js')        
+    script(src='/angularjs/angular.min.js')
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet")
+    link(rel='stylesheet', href='/stylesheets/adm.css')
+    title= 'MagazineLuiza - MagaluFinder'
+  body
+    include partials/menu-adm
+    div(style='height: 185px')
+    block content
+    script(src='/javascript/flowtype.js')
+    script(type='text/javascript').
+        $('body').flowtype({
+            minimum:360,
+            maximum:810,
+            minFont:9,
+            maxFont:16,
+            fontRatio:50
+        });
+

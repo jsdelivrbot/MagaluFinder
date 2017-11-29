@@ -1,0 +1,51 @@
+extends ../../layout-adm
+	
+block content
+	link(rel='stylesheet', href='/stylesheets/glojas/lojas.css')
+	script(src='/angularjs/controllers/adicionarLojas.js')
+	script(src='/javascript/funcoes.js' type='text/javascript')
+
+
+	form(align='center' method='Post' id='formPost')
+		h1(class='titulo') Alterar Loja
+
+		label(for="CodFilial" class='labelItem') CodFilial
+		br
+		input(type='number' name='CodFilial' class='inputItem' required value='#{CodFilial}')
+		br
+
+		label(for="Descricao" class='labelItem') Descricao
+		br
+		input(type='text' name='Descricao' class='inputItem' required value='#{Descricao}' size='50')
+		br
+
+		//div com ng-controller angularJS
+		//aqui, quando o usuario sai do input é gerado as coordenadas
+		div(class='divMaps' ng-controller="geoCode")
+			label(for="Endereco" class='labelItem') Endereco
+			br
+			input(type='text' name='Endereco' ng-blur='myFunc()' class='inputItem' required value='#{Endereco}' size='50' id="Endereco")
+			br
+			
+			label(for="Bairro" class='labelItem') Bairro
+			br
+			input(type='text' name='Bairro' class='inputItem' required value='#{Bairro}' size='40')
+			br
+
+			label(for="Cidade" class='labelItem') Cidade
+			br
+			input(type='text' name='Cidade' class='inputItem' required value='#{Cidade}' size='30' id='Cidade' ng-blur='myFunc()')
+			br
+			input(type='text' name='Latitude' style='border:none;background-color:white;color:#0083CA;text-align:center' value='{{json.results[0].geometry.location.lat}}' readonly='readonly')
+			input(type='text' name='Longitude' style='border:none;background-color:white;color:#0083CA;text-align:center' value='{{json.results[0].geometry.location.lng}}	' readonly='readonly')
+
+		
+
+		label(for="Cep" class='labelItem') Cep
+		br
+		input(type='text' name='Cep' class='inputItem' value='#{Cep}' size='10')
+		br
+		
+		
+		br
+		button(onclick="document.getElementById('formPost').submit()" value="save" style='margin-bottom:40px' class="btn btn-primary") Salvar Alterações

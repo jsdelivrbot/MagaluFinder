@@ -1,0 +1,32 @@
+.divProdutos{
+	width: 100%;
+	margin:0 auto;
+}
+.tabela{
+	margin:0 auto;
+ 	width:80%;
+}
+.titulo{
+	margin-left: 10px;
+	font-weight: bold;
+	color:#0083CA;
+	text-align: center;
+}
+.thItem{
+	text-align:center;padding:1px 0px 10px;
+}
+
+.tdItem{
+	text-align: center;
+	margin-top: 200px;
+	padding:4px 0px 1px;
+}
+
+.inputItem{
+	text-align: center;
+	border-radius: 4px;
+}
+
+.labelItem{
+	margin-top: 30px;
+}

@@ -1,0 +1,86 @@
+extends ../layout
+	
+block content
+	link(rel='stylesheet', href='/stylesheets/selected.css')
+	script(src='/javascript/lojasProximas.js')
+	script(src='/javascript/maps.js')
+
+
+	//Caso haja alguma mensagem de erro, será exibida!
+	if messages.erro
+			br
+			div(class="alert alert-danger")
+				each msg in messages.erro
+					b= msg
+					br
+	
+
+	div(class='divItens')
+		p(class='tituloItem') #{Produto}
+			br
+			i(class='codigoItem') Código #{CodProduto}
+		br
+		
+		table(class='tableProduto')
+			tr
+				td(width='50%')
+					img(src='#{Imagem}' width='80%' onLoad='ordenarDistancias(#{Lat},#{Long})')
+				td(width='50%')
+					table(id='tableLojas' style='display:none')
+						tr
+							th(class='thLojas') Loja:
+							th(class='thLojas') Endereço:
+							th(class='thLojas') Cidade:
+							th(class='thLojas') Distancia:
+						- var i = 1
+						each valor in proximas
+							tr(class='trLojas')
+								td(class='tdLojas') #{valor.Descricao}
+								td(class='tdLojas') #{valor.Endereco}
+								td(class='tdLojas') #{valor.Cidade}
+								td(class='tdLojas' id='t'+i)
+								- i++ 
+					div(class='Searching' id='Searching' style='text-align:center')
+						div(class="loader")
+						br
+						a Aguarde, estamos buscando as lojas mais próximas de você!
+
+					div(class='divTabela' id='divTabela' style='display:none')
+						i(style='font-size:140%') Encontramos pertinho de você!
+						table(ng-controller="ATabela" style='margin-top:30px' class="table table-striped table-bordered")
+							tr
+								th(class='thLojas') Distancia
+								th(class='thLojas') Loja
+								th(class='thLojas') Endereço
+								th(class='thLojas') Cidade
+							tr(ng-repeat='x in array | orderBy:"distancia"' style='text-align:center') 
+								td {{x.distancia}}
+								td {{x.loja}}
+								td {{x.endereco}}
+								td {{x.cidade}}
+			tr
+				td(colspan='2' style='margin-top:780px')
+					br
+					h3(style='font-family:arial') Descrição:
+					i(style='font-size:120%;font-family:arial') #{Descricao}
+			//tr
+				td
+					GeoLocalização Google
+					CHAVE GOOGLEAPI
+					script(async defer  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRrW9xU9wXRS67yz-vGYPihbn2cUDsGhg&callback=initMap")
+					Div para mostrar o mapa - INVISIVEL
+					div(id='map' class='divMaps' )
+				td
+					
+
+
+		
+	script(src='/javascript/flowtype.js')
+	script(type='text/javascript').
+		$('.divItens').flowtype({
+			minimum   : 20,
+			maximum   : 400,
+			minFont   :	12,
+			maxFont   : 15,
+			fontRatio : 30
+		});

@@ -1,0 +1,30 @@
+link(rel='stylesheet', href='/stylesheets/menu-adm.css')
+div(class='divMenu')
+	div(class='divMenuItens')
+	div(class='divMenuGeral')
+		a(href='/logout' style='position: fixed;right: 0%; margin-top:10px' class='itemMenu') Sair
+			span.glyphicon.glyphicon-log-out(style='margin-left:5px')
+		span(class='logo')
+			a(class='fontLogoB' style='color:white') magazineluiza
+			a(class='fontLogo' style='color:white') .com
+			br
+			a(class='fontLogo' style='margin-left:100px;font-size:15px;color:white') /MagaluFinder
+		div(class='campoGeral')
+	div(class='container-strip-footer')
+		span(class='divLu')
+			img(src='/images/lu.png' height='155px' width='155px' style='margin-bottom:4px')
+		include strip-colors
+	div(class='campoItens')
+		if (grupo == 1)
+			div(class='itensMenu')
+				a(href='/gLojas' class='itemMenu') Home
+				a(href='/gLojas/usuarios' class='itemMenu') Usuarios
+				a(href='/gLojas/lojas' class='itemMenu') Lojas
+				a(href='/gLojas/produtos' class='itemMenu') Produtos
+		else if (grupo == 2)
+			div(class='itensMenu')
+				a(href='/gProdutos' class='itemMenu') Home
+				a(href='/gProdutos/MinhaLoja' class='itemMenu') Minha Loja
+		else
+			h4(class='aDescricao') Gerenciador MagaluFinder
+		

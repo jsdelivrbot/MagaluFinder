@@ -1,0 +1,36 @@
+hr(width='90%')
+table(class='tableProdutos')
+	//Div para mostrar o mapa - INVISIVEL
+	div(id='map' class='divMaps' style='display:none')
+	
+	//Contador de linha
+	-var l = 0
+	-var i = 0
+	
+	//Cada valor dos dados recebidos
+	each valor in lista
+		if (i >= 9)
+			-i=0
+		else
+
+			//3 produtos por linha
+			if (l==3)
+				tr
+				-l=0
+			
+			//Insere o produto
+			td(class='tdProdutos' valign='top' onclick="location.href = '/nearby/#{valor.CodProduto}';")
+				img(src='#{valor.Imagem}' style='width:70%')
+				br
+				div(class='divProduto')
+					div(class='aProduto' ) 
+						i(class='aLimitado') #{valor.Produto}
+					span(class='precoProduto' ) R$ #{valor.ValorProduto}
+			- i++
+			- l++
+	if (lista.length == 1)
+		td(class='tdProdutos' valign='top')
+		td(class='tdProdutos' valign='top')
+
+	if (lista.length == 2)
+		td(class='tdProdutos' valign='top')

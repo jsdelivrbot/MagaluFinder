@@ -1,0 +1,63 @@
+.divMaps{
+	margin-left: 5%;
+	margin-top:5px;
+	width: 200px;
+	height: 200px;
+	border-style: outset;
+}
+ 
+.divItens{
+	width: 90%;
+	height: 500px;
+	margin:0 auto;
+}
+
+.tableProdutos{
+	width: 100%;
+	min-height: 100%;
+}
+
+
+.tdProdutos{
+	cursor:pointer;
+	padding-right: 30px;
+	height: 30%;
+	width:33%;
+	text-align: center;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #ffffff;
+}
+
+.divProduto{
+	margin:0 auto;
+	max-width: 400px;
+	min-width: 20px;
+	margin-bottom: 40px;
+}
+
+.tituloItens{
+	font-family: Arial;
+	color:#0083CA;
+	font-size: 160%;
+	margin-left: 5%;
+}
+
+.aProduto{
+	font-weight: bold;
+	font-family: Arial;
+	font-size:15px;
+	max-height: 45px;
+	overflow: hidden;
+}
+
+
+.precoProduto{
+	font-family: Arial;
+	font-weight: bold;	
+	color:#0083CA;
+	font-size: 17px;
+}

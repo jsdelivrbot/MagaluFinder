@@ -1,0 +1,52 @@
+extends ../layout
+	
+block content
+	link(rel='stylesheet', href='/stylesheets/index.css')
+	
+	//Caso haja alguma mensagem de erro, será exibida!
+	if messages.erro
+		br
+		div(class="alert alert-danger")
+			each msg in messages.erro
+				b= msg
+				br
+	
+	//GeoLocalização Google
+	script(src='/javascript/maps.js')
+	//CHAVE GOOGLEAPI
+	script(async defer  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRrW9xU9wXRS67yz-vGYPihbn2cUDsGhg&callback=initMap")
+	//Div para mostrar o mapa - INVISIVEL
+	div(id='map' class='divMaps' style='display:none')
+
+
+	div(class='divItens')
+		if (search)
+			if (lista.length > 0)
+				i(class='tituloItens') Itens encontrados:
+				include components/tabela
+				
+			else
+				i(class='tituloItens') Nenhum item encontrado!
+		else
+			i(class='tituloItens') Mais buscados:
+			include components/inicial
+			
+			
+
+	script(src='/javascript/flowtype.js')
+	script(type='text/javascript').
+		$('.aProduto').flowtype({
+			minimum   : 20,
+			maximum   : 400,
+			minFont   :	12,
+			maxFont   : 15,
+			fontRatio : 30
+		});
+		$('.precoProduto').flowtype({
+			minimum   : 20,
+			maximum   : 200,
+			minFont   :	12,
+			maxFont   : 15,
+			fontRatio : 30
+		});
+

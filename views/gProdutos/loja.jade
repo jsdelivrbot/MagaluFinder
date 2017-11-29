@@ -1,0 +1,61 @@
+extends ../layout-adm
+	
+block content
+	link(rel='stylesheet', href='/stylesheets/glojas/produtos.css')
+	script(src='/javascript/loja-produto.js')
+
+
+	if messages.info
+		div(style='text-align:center;position:fixed;top:160px;width:100%' class="alert alert-danger")
+			each msg in messages.info
+				b= msg	
+
+	h2(class='titulo') Produtos
+	
+	br
+
+
+	if lista.length > 0
+		-var i = 1
+		-var checked = 0
+		
+		
+
+		div(class='divProdutos')
+			table(align='center'  style='background-color:white;font-size:90%' class="table table-striped table-bordered" class='tabela')
+				tread
+					tr
+						th(class='thItem') COD
+						th(class='thItem') IMAGEM
+						th(class='thItem') PRODUTO
+						th(class='thItem') DESCRIÇÃO
+						th(class='thItem') VALOR
+						th(class='thItem') DISPONIVEL
+
+					tbody
+						each valor in lista
+							tr(style='margin-top:10px')
+								td(class='tdItem' style="width:1%;") #{valor.CodProduto}
+								td(class='tdItem' style="width:10%;padding:0px") 
+									img(src='#{valor.Imagem}' width='100%')
+								td(class='tdItem' style="width:20%") 
+									div(class='divDescricao') #{valor.Produto}
+								td(class='tdItem' style="width:49%") 
+									div(class='divDescricao') #{valor.Descricao}
+								td(class='tdItem' style="width:7%") #{valor.ValorProduto}
+
+								//Aqui, ele verifica se consta o item na loja do gestor logado
+								td(class='tdItem' style="width:1%" ) 
+									each i in disponiveis
+										if (i.Produto == valor.CodProduto)
+											input(type='checkBox' id='#{valor.CodProduto}' checked onchange="salvarAlteracao(#{valor.CodProduto})")
+											-checked = 1
+									if (checked == 0)
+										input(type='checkBox' onchange="salvarAlteracao(#{valor.CodProduto})" id='#{valor.CodProduto}')
+									else
+										-checked = 0
+										
+										
+							
+	else
+		h6(style='text-align:center') Nenhum produto encontrado

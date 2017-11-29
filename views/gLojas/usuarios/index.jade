@@ -1,0 +1,61 @@
+extends ../../layout-adm
+	
+block content
+	link(rel='stylesheet', href='/stylesheets/glojas/usuarios.css')
+	if messages.created
+		div(style='text-align:center;position:fixed;top:160px;width:100%' class="alert alert-success")
+			each msg in messages.created
+				b= msg
+
+	if messages.deleted
+		div(style='text-align:center;position:fixed;top:160px;width:100%' class="alert alert-success")
+			each msg in messages.deleted
+				b= msg
+
+	if messages.info
+		div(style='text-align:center;position:fixed;top:160px;width:100%' class="alert alert-danger")
+			each msg in messages.info
+				b= msg	
+
+	h2(class='titulo') Usuários
+	div(style='text-align:right; padding: 0px 10% 0px 0px;')
+		button(onClick="window.location.href='/gLojas/usuarios/adicionar'" class="btn btn-primary" )   
+			span.glyphicon.glyphicon-plus-sign(style='color:white;position:static')|  Adicionar 
+	br
+
+
+	if lista.length > 0
+		-var i = 1
+		
+		
+
+		div(class='divProdutos')
+			table(align='center'  style='background-color:white;font-size:90%' class="table table-striped table-bordered" class='tabela')
+				tread
+					tr
+						th(class='thItem' style='padding:0px;') NOME
+						th(class='thItem' style='padding:0px;') USUARIO
+						th(class='thItem' style='padding:0px;') SENHA
+						th(class='thItem' style='padding:0px;') LOJA
+						th(class='thItem' style='padding:0px;') GRUPO
+						th 
+						th 
+
+					tbody
+						each valor in lista
+							tr(style='margin-top:10px')
+								td(class='tdItem' style="width:19%") #{valor.Nome}
+								td(class='tdItem' style="width:19%") #{valor.Usuario}
+								td(class='tdItem' style="width:19%") *******
+								td(class='tdItem' style="width:19%") #{valor.Loja}
+								td(class='tdItem' style="width:19%") #{valor.Grupo}
+
+										
+								td(class='tdItem' style="width:2%" ) 
+									a(href='/gLojas/usuarios/alterar/#{valor.id}')
+										span.glyphicon.glyphicon-pencil(style='color:Gray;position:static')
+								td(class='tdItem' style="width:2%")
+										a(href='/gLojas/dellusuario/#{valor.id}' )
+											span.glyphicon.glyphicon-trash(style='color:Gray;position:static')
+	else
+		h6(style='text-align:center') Nenhum produto encontrado

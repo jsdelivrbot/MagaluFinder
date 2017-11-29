@@ -1,0 +1,43 @@
+extends ../../layout-adm
+	
+block content
+	link(rel='stylesheet', href='/stylesheets/glojas/usuarios.css')
+	script(src='/javascript/funcoes.js' type='text/javascript')
+
+	form(align='center' method='Post')
+			h1(class='titulo') Adicionar Usuário
+
+			label(for="Nome" class='labelItem') Nome
+			br
+			input(type='text' name='Nome' class='inputItem' required placeholder="José da Silva")
+			br
+
+			label(for="Usuario" class='labelItem') Usuário
+			br
+			input(type='text' name='Usuario' class='inputItem' required placeholder="jose.silva" size='50')
+			br
+			
+			label(for="Senha" class='labelItem') Senha
+			br
+			input(type='password' name='Senha' class='inputItem' required placeholder="*********" size='50')
+			br
+			
+			//caso seja selecionado opcao2, ativara a divFilial
+			label(for="Produto" class='labelItem') Grupo 
+			br
+			select(name='Grupo' id='selectGrupo' onchange='ativDiv()' class='inputItem')
+				option(value=1) Gestor de Lojas
+				option(value=2) Gestor de Produtos
+			br
+
+			//caso seja gestor de produtos, ativara a opção para informar de qual loja
+			div(id='divFilial' style='display:none')
+				label(for="Loja" class='labelItem') Filial
+				br
+				select(name='Loja' class='inputItem')
+					each valor in lista
+						option(value="#{valor.CodFilial}") #{valor.CodFilial}
+					br
+			
+			br
+			button(type='submit' value="save" style='margin-bottom:40px' class="btn btn-primary") Adicionar Usuário

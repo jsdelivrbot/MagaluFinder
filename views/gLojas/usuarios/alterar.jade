@@ -1,0 +1,42 @@
+extends ../../layout-adm
+	
+block content
+	link(rel='stylesheet', href='/stylesheets/glojas/produtos.css')
+	script(src='/javascript/funcoes.js' type='text/javascript')
+
+
+	form(align='center' method='Post')
+			h1(class='titulo') Alterar Usuário
+
+			label(for="Nome" class='labelItem') Nome
+			br
+			input(type='text' name='Nome' class='inputItem' required value='#{Nome}' size='50')
+			br
+
+			label(for="Usuario" class='labelItem') Usuário
+			br
+			input(type='text' name='Usuario' class='inputItem' required size='30' value='#{Usuario}')
+			br
+			
+			label(for="Senha" class='labelItem') Senha
+			br
+			input(type='password' name='Senha' class='inputItem' required size='30' value='#{Senha}')
+			br
+			
+			
+			label(for="Grupo" class='labelItem') Grupo 
+			br
+			//Definir qual começa selecionado
+			if Grupo == 1
+				select(name='Grupo' id='selectGrupo' onchange='ativDiv()' class='inputItem')
+					option(value=1, selected) Gestor de Lojas
+					option(value=2) Gestor de Produtos
+			if Grupo == 2
+				select(name='Grupo' id='selectGrupo' onchange='ativDiv()' class='inputItem')
+					option(value=1) Gestor de Lojas
+					option(value=2, selected) Gestor de Produtos
+					ativDiv()
+			br
+			
+			br
+			button(type='submit' value="save" style='margin-bottom:40px' class="btn btn-primary") Alterar Usuário
