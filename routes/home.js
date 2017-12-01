@@ -6,17 +6,17 @@ module.exports = function(app){
 	
 	app.route('/')
 		.get(home.index)
-		.post(home.redirectSearch)
+		.post(home.search)
+
+	app.route('/getLocation/:id/:lat/:lng')
+		.get(home.getLocation)
 
 	app.route('/search')
 		.get(home.search)
-		.post(home.redirectSearch)
+		.post(home.search)
 
-	app.route('/nearby/:id')
-		.get(home.nearBy)
-		.post(home.redirectSearch)
 
 	app.route('/select/:id')
-		.get(home.semLocalizacao,home.selected)
-		.post(home.redirectSearch)
+		.get(home.selected)
+		.post(home.search)
 }

@@ -20,8 +20,14 @@ div(class='divMenu')
 	div(class='campoItens')
 		form(method='Post' id='formPost')
 			input(type='text' id='search' name='search' class='inputBuscar' placeHolder='Procure por código, nome, marca' )
-			button(class='btnSearch' type='submit')
+			button(class='btnSearch' onclick='document.getElementById("formPost").submit()')
 			div(style='display:none')
+				//GeoLocalização Google
+				script(src='/javascript/maps.js')
+				//CHAVE GOOGLEAPI
+				script(async defer  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRrW9xU9wXRS67yz-vGYPihbn2cUDsGhg&callback=initMap")
+				//Div para mostrar o mapa - INVISIVEL
+				div(id='map' class='divMaps' style='display:none')
 				input(type='text' id='Latitude' name='Latitude')
 				input(type='text' id='Longitude' name='Longitude')
 		

@@ -2,10 +2,10 @@ module.exports = function(app){
 	var app		  = require ('../index.js');
 	var sequelize = require ('sequelize');
 	var Sequelize = require ('../index.js');
-	var search;
-	var latitude;
-	var longitude;
+	var latitude = 0;
+	var longitude = 0;
 	var lojasProxima = []
+	
 
 	//Importar local dos models para Sequelize
 	var modelsProdutos 	= require('../models/Produtos');
@@ -24,22 +24,18 @@ module.exports = function(app){
 			Produtos.findAll({
 				atributes:['CodProduto','Imagem','Produto','Descricao','ValorProduto']
 			}).then(dados =>{
+				var dadosSortidos=[]
+				for (i=0;i<=9;i++){
+					dadosSortidos.push(dados[Math.ceil(Math.random() * dados.length)])
+				}				
 				res.render('pages/index',{
-				lista:dados
+				lista:dadosSortidos
 				})
 			})
 		},
 
-		//Quando o cliente é redirecionado, é solicitado suas coordenadas e o que procura
-		redirectSearch:function(req,res){
-			latitude =req.body.Latitude;
-			longitude=req.body.Longitude;
-			search 	 =req.body.search;
-			res.redirect('/search')
-		},
-
 		search:function(req,res){
-			lojasProxima.length = 0
+			var search 	 =req.body.search;
 			const Op = Sequelize.Op;
 			Produtos.findAll({
 				where:{[Op.or]:[{CodProduto:search},{Produto:{[Op.like]:'%'+search+'%'}},{Search:{[Op.like]:'%'+search+'%'}}]},
@@ -47,22 +43,23 @@ module.exports = function(app){
 			}).then(dados =>{
 				res.render('pages/index',{
 				lista:dados,
-				search:search,
-				Lat:latitude
+				search:search
 				})
 			})
 		},
 
-		nearBy:function(req,res){
-			lojasProxima.length = 0
-			var teste
-			
+
+		//Quando clica no produto, é solicitado suas coordenadas e feito préfiltro.
+		getLocation:function(req,res){
 			var ID = req.params.id;
+			latitude =req.params.lat;
+			longitude=req.params.lng;
+			lojasProxima.length=0
+
 			LP.findAll({
 				where:{'Produto':ID},
 				atributes:['Filial']
 			}).then(function(lojas){
-				console.log('testeaqui'+lojas.length)
 				
 				for(i=0;i<lojas.length;i++){
 					Lojas.findOne({
@@ -88,15 +85,34 @@ module.exports = function(app){
 			
 		},
 		selected:function(req,res){
-			
 			const Op = Sequelize.Op;
 			var ID = req.params.id;
-			console.log('aqui'+lojasProxima)
+			if(latitude != 0){
 
+				Lojas.findAll({
+					where:{'CodFilial':{[Op.in]: [lojasProxima]}}
+				}).then(function(proximas){
+					Produtos.findOne({
+						where:{'CodProduto':ID},
+						atributes:['CodProduto','Imagem','Produto','Descricao','ValorProduto']
+					}).then(function(results){
+						res.render('pages/selected',{
+							CodProduto:results.dataValues.CodProduto,
+							Imagem:results.dataValues.Imagem,
+							Produto:results.dataValues.Produto,
+							Descricao:results.dataValues.Descricao,
+							ValorProduto:results.dataValues.ValorProduto,
+							Lat:latitude,
+							Long:longitude,
+							proximas:proximas
+						})
 
-			Lojas.findAll({
-				where:{'CodFilial':{[Op.in]: [lojasProxima]}}
-			}).then(function(proximas){
+						latitude=0;
+						longitude=0;
+					})
+				})
+
+			}else{
 				Produtos.findOne({
 					where:{'CodProduto':ID},
 					atributes:['CodProduto','Imagem','Produto','Descricao','ValorProduto']
@@ -109,22 +125,12 @@ module.exports = function(app){
 						ValorProduto:results.dataValues.ValorProduto,
 						Lat:latitude,
 						Long:longitude,
-						proximas:proximas
+						proximas:0
 					})
 				})
-			})
-			
-		},
-
-		semLocalizacao:function(req,res,next){
-			if (search){
-				return next();
-			}else{
-				req.flash('erro','Para te ajudar, precisamos que você permita exibir sua localização!')
-				return res.redirect('/')
-			}
-			
+			}			
 		}
+
 	}
 	return HomeController
 
