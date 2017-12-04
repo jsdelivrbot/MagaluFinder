@@ -8,9 +8,6 @@ function ordenarDistancias(latitude,longitude){
   var table = document.getElementById("tableLojas");
   // Captura a quantidade de linhas já existentes na tabela
   numOfRows = table.rows.length;
-  
-  
- 
  
   var magaluFinder = angular.module('MagaluFinder', []);
   magaluFinder.controller('ATabela', ['$scope','$http', function($scope,$http) {
@@ -27,37 +24,47 @@ function ordenarDistancias(latitude,longitude){
       var enderecoCliente = lat+','+long;
     }
 
-    var time = 0
+    function chamaBusca(){
+      buscaLoja()
+    }
+    setTimeout(chamaBusca,500)
+    /*var time = 0
     for(i=1;i<numOfRows;i++){
 
       setTimeout(buscaLoja,time)
       time=time+1000
-    }
+    }*/
     function buscaLoja(){
         var baseUrl = 'https://cors-every.herokuapp.com/https://maps.googleapis.com/maps/api/distancematrix/json?origins='+enderecoCliente+'&destinations='+$scope.endereco[contador]+'&key=AIzaSyDRrW9xU9wXRS67yz-vGYPihbn2cUDsGhg';
         $http.get(baseUrl).then(function(response) {
         $scope.meters = response.data.rows[0].elements[0].distance.text
         $scope.n=$scope.meters.search('km')
+        
+        //Caso seja metros, será dividido por 1000;
         if($scope.n < 0){
           $scope.distanciaExata=(parseInt(response.data.rows[0].elements[0].distance.text)/1000) + ' km'
           $scope.distanciaExata=$scope.distanciaExata.replace('.',',')
         }else{
           $scope.distanciaExata=response.data.rows[0].elements[0].distance.text
         }
+        
         $scope.distancia.push($scope.distanciaExata)
         $scope.array.push({ 'distancia':$scope.distancia[($scope.json)],
                             'loja':$scope.loja[($scope.json)],
                             'endereco':$scope.endereco[($scope.json)],
                             'cidade':$scope.cidade[($scope.json)]})
+        if (contador == (numOfRows-1)){
+          setTimeout(ativarTabela,500)
+        }else{
+          chamaBusca()
+        }
         $scope.json++
         }, function(err) {
         console.log = err
         });
         
         contador++
-        if (contador == (numOfRows-1)){
-          setTimeout(ativarTabela,2000)
-        }
+        
       }
 
     
